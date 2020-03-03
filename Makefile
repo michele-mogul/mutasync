@@ -68,7 +68,7 @@ go-compile: go-get go-build go-build-windows-32 go-build-windows-64
 
 go-build:
 	@echo "  >  Building binary..."
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)  && zip $(GOBIN)/$(PROJECTNAME).zip $(GOBIN)/$(PROJECTNAME)
 
 go-build-windows-32:
 	@echo "  >  Building binary for windows 32 bit..."
