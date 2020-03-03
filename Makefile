@@ -64,15 +64,19 @@ clean:
 	@-rm $(GOBIN)/$(PROJECTNAME) 2> /dev/null
 	@-$(MAKE) go-clean
 
-go-compile: go-get go-build go-build-windows
+go-compile: go-get go-build go-build-windows-32 go-build-windows-64
 
 go-build:
 	@echo "  >  Building binary..."
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)
 
-go-build-windows:
+go-build-windows-32:
 	@echo "  >  Building binary for windows..."
-	@GOPATH=$(GOPATH) env GOOS=windows GOARCH=386 GOBIN=$(GOBIN) go build -o $(GOBIN)/$(PROJECTNAME).exe $(GOFILES)
+	@GOPATH=$(GOPATH) env GOOS=windows GOARCH=386 GOBIN=$(GOBIN) go build -o $(GOBIN)/$(PROJECTNAME)-32.exe $(GOFILES)
+
+go-build-windows-64:
+	@echo "  >  Building binary for windows..."
+	@GOPATH=$(GOPATH) env GOOS=windows GOARCH=amd64 GOBIN=$(GOBIN) go build -o $(GOBIN)/$(PROJECTNAME)-64.exe $(GOFILES)
 
 go-generate:
 	@echo "  >  Generating dependency files..."
