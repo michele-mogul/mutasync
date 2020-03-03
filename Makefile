@@ -71,11 +71,11 @@ go-build:
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)
 
 go-build-windows-32:
-	@echo "  >  Building binary for windows..."
+	@echo "  >  Building binary for windows 32 bit..."
 	@GOPATH=$(GOPATH) env GOOS=windows GOARCH=386 GOBIN=$(GOBIN) go build -o $(GOBIN)/$(PROJECTNAME)-32.exe $(GOFILES)
 
 go-build-windows-64:
-	@echo "  >  Building binary for windows..."
+	@echo "  >  Building binary for windows 64 bit..."
 	@GOPATH=$(GOPATH) env GOOS=windows GOARCH=amd64 GOBIN=$(GOBIN) go build -o $(GOBIN)/$(PROJECTNAME)-64.exe $(GOFILES)
 
 go-generate:
