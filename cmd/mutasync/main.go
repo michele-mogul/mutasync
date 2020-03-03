@@ -132,7 +132,7 @@ func askForPath(labelPath string) string {
 		fmt.Println("Enter " + labelPath + " path")
 
 		fmt.Scanln(&pathRequiredInput)
-		condition = exits(pathRequiredInput)
+		condition = mutasync.Exists(pathRequiredInput)
 		if condition {
 			fmt.Println("Path not valid, enter correct path")
 		}

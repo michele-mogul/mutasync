@@ -8,7 +8,7 @@ PROJECTNAME := $(shell basename "$(PWD)")
 GOBASE := $(shell pwd)
 GOPATH := $(GOBASE)/vendor:$(GOBASE)
 GOBIN := $(GOBASE)/bin
-GOFILES := $(wildcard *.go)
+GOFILES := $(wildcard ./cmd/mutasync/*.go)
 
 # Use linker flags to provide version/build settings
 LDFLAGS=-ldflags "-X=main.Version=$(VERSION) -X=main.Build=$(BUILD)"
@@ -64,11 +64,15 @@ clean:
 	@-rm $(GOBIN)/$(PROJECTNAME) 2> /dev/null
 	@-$(MAKE) go-clean
 
-go-compile: go-get go-build
+go-compile: go-get go-build go-build-windows
 
 go-build:
 	@echo "  >  Building binary..."
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/$(PROJECTNAME) $(GOFILES)
+
+go-build-windows:
+	@echo "  >  Building binary for windows..."
+	@GOPATH=$(GOPATH) env GOOS=windows GOARCH=386 GOBIN=$(GOBIN) go build -o $(GOBIN)/$(PROJECTNAME).exe $(GOFILES)
 
 go-generate:
 	@echo "  >  Generating dependency files..."
@@ -76,7 +80,7 @@ go-generate:
 
 go-get:
 	@echo "  >  Checking if there is any missing dependencies..."
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go get $(get)
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go get -v all $(get)
 
 go-install:
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go install $(GOFILES)
