@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/azer/logger v1.0.0 // indirect
+	gopkg.in/yaml.v2 v2.2.8
 	github.com/azer/yolo v0.0.0-20180819171155-df2a2bdacdd0 // indirect
 	github.com/fsnotify/fsnotify v1.4.7 // indirect
 	github.com/gorilla/websocket v1.4.1 // indirect
