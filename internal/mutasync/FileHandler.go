@@ -2,7 +2,7 @@ package mutasync
 
 import "os"
 
-func exists(path string) bool {
+func Exists(path string) bool {
 	info, err := os.Stat(path)
 	if os.IsNotExist(err) {
 		return false
